@@ -1,0 +1,39 @@
+Steps to follow:
+
+1. enable CLR for triggers
+
+sp_configure 'clr enabled', 1;
+GO
+    reconfigure
+GO
+
+
+2. Change strict security to 0
+Modify installation to account for "CLR strict security" in SQL Server 2017
+https://github.com/tSQLt-org/tSQLt/issues/25
+
+EXEC sp_configure 'show advanced options', 1
+RECONFIGURE;
+EXEC sp_configure 'clr strict security', 0;
+RECONFIGURE;
+
+
+3. build assembly using visual studio
+
+after you have built the assembly using visual studio (This willgive you a dll file), create assembly in SQL server using following command
+
+alter database epglobal  set trustworthy on;
+GO
+CREATE ASSEMBLY CLRTrigger
+FROM 'path of the dll file'
+WITH PERMISSION_SET = ALL
+GO 
+
+
+create the trigger
+
+CREATE TRIGGER test
+ON dbo.customer
+FOR INSERT, UPDATE, DELETE
+AS
+EXTERNAL NAME CLRTrigger.Triggers.SqlTrigger1;
