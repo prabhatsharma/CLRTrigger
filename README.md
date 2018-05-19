@@ -2,8 +2,8 @@ Steps to follow:
 
 1. enable CLR for triggers
 
-``` sql
-sp_configure 'clr enabled', 1;
+```sql
+EXEC sp_configure 'clr enabled', 1;
 GO
     reconfigure
 GO
@@ -14,7 +14,7 @@ Modify installation to account for "CLR strict security" in SQL Server 2017
 https://github.com/tSQLt-org/tSQLt/issues/25
 
 ```sql
-EXEC sp_configure 'show advanced options', 1
+EXEC sp_configure 'show advanced options', 1;
 RECONFIGURE;
 ```
 ```sql
@@ -24,7 +24,7 @@ RECONFIGURE;
 
 3. build assembly using visual studio
 
-after you have built the assembly using visual studio (This willgive you a dll file), create assembly in SQL server using following command
+after you have built the assembly using visual studio (This will give you a dll file), create assembly in SQL server using following command
 
 ```sql
 alter database epglobal  set trustworthy on;
@@ -36,7 +36,7 @@ GO
 ```
 
 
-create the trigger
+now create the trigger
 
 ```sql
 CREATE TRIGGER test
