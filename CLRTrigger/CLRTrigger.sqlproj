@@ -71,6 +71,6 @@
     <Compile Include="SqlTrigger1.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Name.sql" />
+    <Build Include="dbo\Tables\customer.sql" />
   </ItemGroup>
 </Project>
